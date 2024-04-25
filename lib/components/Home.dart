@@ -24,7 +24,7 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  Widget createStock(String name, double price, String symbol) {
+  Widget createStock(String name, num price, String symbol) {
     return Padding(
       padding: EdgeInsets.all(10),
       child: Container(

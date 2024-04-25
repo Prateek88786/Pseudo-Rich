@@ -4,14 +4,14 @@ import 'package:stock_app/components/Home.dart';
 import 'package:stock_app/components/holding.dart';
 import 'package:stock_app/main.dart';
 
-double price = 0;
+num price = 0;
 double balance = 0;
 String email = "";
 String name = "";
 String symbol = "";
 
 class Buy extends StatefulWidget {
-  Buy(String e, double p, String n, String s, double b) {
+  Buy(String e, num p, String n, String s, double b) {
     price = p;
     email = e;
     name = n;
@@ -25,7 +25,7 @@ class Buy extends StatefulWidget {
 
 class _BuyState extends State<Buy> {
   TextEditingController quantityController = TextEditingController();
-  double totalPrice = 0;
+  num totalPrice = 0;
   int quantity = 0;
 
   @override
@@ -65,7 +65,7 @@ class _BuyState extends State<Buy> {
               keyboardType: TextInputType.number,
               decoration: InputDecoration(
                 hintText: 'Enter quantity',
-                hintStyle: TextStyle(color: Colors.white),
+                hintStyle: TextStyle(color: Colors.white.withOpacity(0.4)),
                 border: OutlineInputBorder(),
               ),
               onChanged: (value) {

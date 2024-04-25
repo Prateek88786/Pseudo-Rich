@@ -22,13 +22,13 @@ class Holding extends StatefulWidget {
 }
 
 class _HoldingState extends State<Holding> {
-  Widget createStock(String name, double price, int quantity,
-      double currentPrice, String symbol) {
+  Widget createStock(
+      String name, num price, int quantity, num currentPrice, String symbol) {
     //print(name);
     //print(price);
     //print(currentPrice);
-    double profit = 0;
-    double loss = 0;
+    num profit = 0;
+    num loss = 0;
     if (currentPrice >= price) {
       profit = (currentPrice - price) * quantity;
     } else {
@@ -94,21 +94,22 @@ class _HoldingState extends State<Holding> {
   }
 
   Future<List<Widget>> createList() async {
-    double currentPrice = 0;
+    num currentPrice = 0;
     var curr = await http.get(
         Uri.parse('https://flutter-stocks-app-backend.vercel.app/api/stocks'));
     List<dynamic> currentValue = json.decode(curr.body);
-    //print(currentValue);
-    var response = await http
-        .get(Uri.parse('http://192.168.111.205:5000/api/user/$email'));
+    print(currentValue);
+    print("done");
+    var response = await http.get(Uri.parse(
+        'http://flutter-stocks-app-backend.vercel.app/api/user/$email'));
     List<dynamic> stockList = json.decode(response.body);
-    print(stockList[0]["name"]);
+    print(stockList);
     List<Widget> stocks = [];
     for (var stock in stockList[0]["bought"]) {
       var matchingCurrentValue = currentValue.firstWhere(
           (e) => e["symbol"] == stock["symbol"],
           orElse: () => null);
-      double currentPrice =
+      num currentPrice =
           matchingCurrentValue != null ? matchingCurrentValue["price"] : 0.0;
       stocks.add(createStock(stock["name"], stock["price"], stock["quantity"],
           currentPrice, stock["symbol"]));
